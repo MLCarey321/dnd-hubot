@@ -5,8 +5,7 @@
   "author": "MLCarey321@gmail.com",
   "description": "A super simple bot",
   "dependencies": {
-    "hubot-slack": "^3.4.2",
-    "hubot-google-translate": "awailly/hubot-google-translate#fix-tests"
+    "hubot-slack": "^3.4.2"
   },
   "engines": {
     "node": "0.10.x"
