@@ -103,7 +103,7 @@ module.exports = (robot) ->
         try
           if body.length > 4
             parsed = JSON.parse(body)
-            msg.send parsed
+            msg.send parsed[0]
             #msg.send parsed[0]
             #language = languages[parsed[1]]
             #language = language.split "-"
