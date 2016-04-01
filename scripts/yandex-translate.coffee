@@ -107,7 +107,7 @@ module.exports = (robot) ->
             msg.send parsed[0]
             language = languages[parsed[1]]
             language = language.split "-"
-            parsed - parsed[2][0]
+            parsed = parsed[2][0]
             parsed and= parsed.trim()
             if msg.match[2] is undefined
               msg.send "#{term} is #{language[1]} for #{parsed}"
