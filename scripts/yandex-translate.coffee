@@ -101,10 +101,11 @@ module.exports = (robot) ->
           return
 
         try
-          if body.length > 4
-            parsed = JSON.parse(body)
-            msg.send parsed[0]
-            #msg.send parsed[0]
+          if body
+            parsed = JSON.parse body
+            for key, value of parsed
+              console.log "#{key} --> #{value}"
+            msg.send parsed.text
             #language = languages[parsed[1]]
             #language = language.split "-"
             #parsed = parsed[2][0]
