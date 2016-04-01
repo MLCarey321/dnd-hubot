@@ -105,7 +105,7 @@ module.exports = (robot) ->
           if body
             parsed = JSON.parse body
             language = parsed.lang.split "-"
-            text = parsed.text
+            text = if parsed.text.0 isnt undefined then parsed.text.0 else parsed.text
             if text
               if msg.match[2] is undefined
                 msg.send "#{term} is #{languages[language[0]]} for #{text}"
