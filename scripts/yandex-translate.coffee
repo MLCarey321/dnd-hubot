@@ -103,18 +103,13 @@ module.exports = (robot) ->
         try
           if body
             parsed = JSON.parse body
-            for key, value of parsed
-              console.log "#{key} --> #{value}"
-            msg.send parsed.text
-            #language = languages[parsed[1]]
-            #language = language.split "-"
-            #parsed = parsed[2][0]
-            #parsed and= parsed.trim()
-            #if parsed
-            #  if msg.match[2] is undefined
-            #    msg.send "#{term} is #{language[1]} for #{parsed}"
-            #  else
-            #    msg.send "The #{language[0]} #{term} translates as #{parsed} in #{languages[target]}"
+            language = parsed.lang.split "-"
+            text = parsed.text
+            if text
+              if msg.match[2] is undefined
+                msg.send "#{term} is #{language[1]} for #{text}"
+              else
+                msg.send "The #{languages[language[0]]} #{term} translates as #{parsed} in #{languages[target]}"
           else
             msg.send body
             throw new SyntaxError 'Invalid JS code'
