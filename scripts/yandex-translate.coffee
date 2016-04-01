@@ -101,9 +101,8 @@ module.exports = (robot) ->
           return
 
         try
-          if body.length > 4 and body[0] == '{'
-            parsed = eval(body)
-            msg.send parsed
+          if body.length > 4
+            msg.send body
             #language = languages[parsed[2]]
             #parsed = parsed[0] and parsed[0][0] and parsed[0][0][0]
             #parsed and= parsed.trim()
