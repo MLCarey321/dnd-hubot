@@ -117,7 +117,7 @@ module.exports = (robot) ->
               if msg.match[2] is undefined
                 msg.send "#{term} is #{languages[language[0]]} for #{text}"
               else
-                msg.send "The #{languages[language[0]]} #{term} translates as #{parsed} in #{languages[target]}"
+                msg.send "The #{languages[language[0]]} #{term} translates as #{text} in #{languages[target]}"
           else
             msg.send body
             throw new SyntaxError 'Invalid JS code'
