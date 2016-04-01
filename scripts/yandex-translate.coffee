@@ -83,15 +83,16 @@ module.exports = (robot) ->
                        '(.*)', 'i')
   robot.respond pattern, (msg) ->
     term   = "\"#{msg.match[3]?.trim()}\""
-    origin = if msg.match[1] isnt undefined then getCode(msg.match[1], languages) else 'auto'
     target = if msg.match[2] isnt undefined then getCode(msg.match[2], languages) else 'en'
+    lang = if msg.match[1] isnt undefined then "#{getCode(msg.match[1], languages)}-#{target}" else target
+    console.log lang
 
     msg.http("https://translate.yandex.net/api/v1.5/tr.json/translate")
       .query({
         key: 'trnsl.1.1.20160401T182909Z.2f5ea9566adf53fc.a5fb64c6d9636df8a2d4dbb3f64fb8df8d25004b'
         text: term
         format: 'plain'
-        lang: target
+        lang: lang
       })
       .header('User-Agent', 'Mozilla/5.0')
       .get() (err, res, body) ->
