@@ -107,9 +107,12 @@ module.exports = (robot) ->
             language = parsed.lang.split "-"
             texts = parsed.text
             for k,v of texts
+              console.log "#{k} --> #{v}"
               text = v
+            console.log "1st: #{text}"
             if text is undefined
               text = texts
+            console.log "2nd: #{text}"
             if text
               if msg.match[2] is undefined
                 msg.send "#{term} is #{languages[language[0]]} for #{text}"
