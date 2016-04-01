@@ -85,6 +85,7 @@ module.exports = (robot) ->
     term   = "\"#{msg.match[3]?.trim()}\""
     origin = if msg.match[1] isnt undefined then getCode(msg.match[1], languages) else 'auto'
     target = if msg.match[2] isnt undefined then getCode(msg.match[2], languages) else 'en'
+
     msg.http("https://translate.yandex.net/api/v1.5/tr.json/translate")
       .query({
         key: 'trnsl.1.1.20160401T182909Z.2f5ea9566adf53fc.a5fb64c6d9636df8a2d4dbb3f64fb8df8d25004b'
@@ -98,20 +99,25 @@ module.exports = (robot) ->
           msg.send "Failed to connect to GAPI"
           robot.emit 'error', err, res
           return
+
         try
-          if body.length > 4
-            msg.send body
-            #language = languages[parsed[2]]
-            #parsed = parsed[0] and parsed[0][0] and parsed[0][0][0]
-            #parsed and= parsed.trim()
-            #if parsed
-            #  if msg.match[2] is undefined
-            #    msg.send "#{term} is #{language} for #{parsed}"
-            #  else
-            #    msg.send "The #{language} #{term} translates as #{parsed} in #{languages[target]}"
+          if body.length > 4 and body[0] == '{'
+            parsed = eval(body)
+            msg.send parsed
+            msg.send parsed[0]
+            language = languages[parsed[1]]
+            language = language.split "-"
+            parsed - parsed[2][0]
+            parsed and= parsed.trim()
+            if parsed
+              if msg.match[2] is undefined
+                msg.send "#{term} is #{language[1]} for #{parsed}"
+              else
+                msg.send "The #{language[0]} #{term} translates as #{parsed} in #{languages[target]}"
           else
             msg.send body
             throw new SyntaxError 'Invalid JS code'
+
         catch err
           msg.send "Failed to parse GAPI response"
           robot.emit 'error', err
