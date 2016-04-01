@@ -107,7 +107,7 @@ module.exports = (robot) ->
             text = parsed.text
             if text
               if msg.match[2] is undefined
-                msg.send "#{term} is #{language[1]} for #{text}"
+                msg.send "#{term} is #{languages[language[0]]} for #{text}"
               else
                 msg.send "The #{languages[language[0]]} #{term} translates as #{parsed} in #{languages[target]}"
           else
